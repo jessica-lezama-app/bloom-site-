@@ -65,7 +65,7 @@ h1 em{font-style:normal;background:linear-gradient(120deg,#f58cb8,var(--pink-ink
 .stage{position:relative;display:grid;place-items:center;min-height:620px}
 .blob{position:absolute;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,var(--pink) 0,transparent 70%);opacity:.55;filter:blur(30px);animation:breathe 6s ease-in-out infinite}
 @keyframes breathe{50%{transform:scale(1.1)}}
-.phone{position:relative;width:292px;height:600px;border-radius:46px;background:#1d1a1c;padding:11px;box-shadow:0 40px 80px -30px rgba(222,108,156,.7),0 0 0 2px #2b2729 inset;animation:float 6s ease-in-out infinite}
+.phone{position:relative;width:min(330px,78vw);height:auto;filter:drop-shadow(0 40px 50px rgba(222,108,156,.45));animation:float 6s ease-in-out infinite}
 @keyframes float{50%{transform:translateY(-12px) rotate(-1deg)}}
 .screen{position:relative;width:100%;height:100%;border-radius:36px;background:linear-gradient(var(--canvas),var(--warm));overflow:hidden;padding:42px 16px 0}
 .notch{position:absolute;top:10px;left:50%;translate:-50% 0;width:84px;height:24px;border-radius:99px;background:#1d1a1c}
@@ -96,7 +96,7 @@ h1 em{font-style:normal;background:linear-gradient(120deg,#f58cb8,var(--pink-ink
 .bloom p{position:absolute;bottom:14px;font-size:12px;font-weight:900;color:var(--pink-ink);opacity:0;transition:opacity .6s .4s}
 .screen.full .bloom p{opacity:1}
 .float-chip{position:absolute;z-index:3;background:#fff;border-radius:18px;padding:10px 14px;font-weight:800;font-size:13px;box-shadow:var(--shadow);border:1px solid var(--hair);display:flex;gap:8px;align-items:center;animation:float 5s ease-in-out infinite}
-.fc1{left:-2%;top:16%;animation-delay:-1s}.fc2{right:-4%;top:46%;animation-delay:-2.5s}.fc3{left:-4%;bottom:14%;animation-delay:-4s}
+.fc1{left:-6%;top:7%;animation-delay:-1s}.fc2{right:-12%;top:32%;animation-delay:-2.5s}.fc3{left:-4%;bottom:14%;animation-delay:-4s}
 
 /* sections */
 section{padding:84px 0}
@@ -228,15 +228,7 @@ footer{border-top:1px solid var(--hair);padding:36px 0 50px;color:var(--ink-soft
     <div class="float-chip fc1">🔥 7 jours de suite</div>
     <div class="float-chip fc2">🏆 Nouveau trophée !</div>
     <div class="float-chip fc3">🔔 C'est l'heure de ton verre d'eau</div>
-    <div class="phone" role="img" aria-label="Aperçu de l'écran Aujourd'hui de Bloom Habits">
-      <div class="screen" id="screen">
-        <div class="notch"></div>
-        <div class="hello">Bonjour Léa <svg width="22" height="22" viewBox="0 0 24 24"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" fill="#FFB3D1" stroke="#DE6C9C" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
-        <div class="week" id="week"></div>
-        <div class="chips"><span class="chip on">Toutes</span><span class="chip">Beauté</span><span class="chip">Sport</span><span class="chip">Santé</span></div>
-        <div id="cards"></div>
-        <div class="bloom"><svg class="flower"><use href="#flw"/></svg><p>Journée complète ✿</p></div>
-      </div>
+    <img class="phone" src="/phone.webp" width="611" height="1260" alt="Écran Aujourd'hui de Bloom Habits : habitudes du jour à cocher" fetchpriority="high">
     </div>
   </div>
 </div>
@@ -300,8 +292,8 @@ footer{border-top:1px solid var(--hair);padding:36px 0 50px;color:var(--ink-soft
 </main>
 
 <footer><div class="wrap foot">
-  <span>© <span id="y"></span> Bloom Habits</span>
-  <nav><a href="https://w7h2ct8ewt7gyamfjds91-web.rork.live/support">Support</a><a href="https://w7h2ct8ewt7gyamfjds91-web.rork.live/privacy">Confidentialité</a><a href="https://w7h2ct8ewt7gyamfjds91-web.rork.live/terms">Conditions</a></nav>
+  <div><b>Bloom Habits</b><br>Éditée par Jessica Lezama, entreprise individuelle de droit suisse (Suisse).<br>© <span id="y"></span> · <a href="mailto:contact@bloomhabitsapp.com">contact@bloomhabitsapp.com</a></div>
+  <nav><a href="/support">Aide</a><a href="/privacy">Confidentialité</a><a href="/terms">Conditions</a><a href="/privacy-choices">Mes données</a></nav>
 </div></footer>
 
 <script>
@@ -333,28 +325,6 @@ footer{border-top:1px solid var(--hair);padding:36px 0 50px;color:var(--ink-soft
     if(r>.78){d.className="f";d.innerHTML='<svg width="16" height="16"><use href="#flw"/></svg>'}
     else if(r>.5)d.className="l2";else if(r>.28)d.className="l1";g.appendChild(d)}
 
-  // phone demo
-  var days=["L","M","M","J","V","S","D"],w=document.getElementById("week"),rings=[];
-  days.forEach(function(d,i){var e=document.createElement("div");e.className="day";
-    e.innerHTML=d+'<div class="ring'+(i===3?" today":"")+'"></div>';w.appendChild(e);rings.push(e.querySelector(".ring"))});
-  [0,1,2].forEach(function(i){rings[i].classList.add("done");rings[i].innerHTML='<svg width="16" height="16"><use href="#flw"/></svg>'});
-  var habits=[["💧","Boire 2 L d'eau","#FFD6E8","#DE6C9C"],["🧘","Yoga du matin","#CFE7FF","#6C9CC9"],["✨","Routine skincare","#E7DCFF","#8E77C9"]];
-  var cw=document.getElementById("cards"),cards=[];
-  habits.forEach(function(h){var c=document.createElement("div");c.className="card";c.style.setProperty("--c",h[3]);
-    var sp="";for(var j=0;j<8;j++){var a=j/8*6.283;sp+='<i style="--x:'+Math.round(Math.cos(a)*26)+'px;--y:'+Math.round(Math.sin(a)*26)+'px"></i>'}
-    c.innerHTML='<div class="ico" style="background:'+h[2]+'">'+h[0]+'</div><div style="flex:1"><b>'+h[1]+'</b><div class="bar"><i></i></div></div><div class="check">✓<span class="spark">'+sp+'</span></div>';
-    cw.appendChild(c);cards.push(c)});
-  var screen=document.getElementById("screen"),step=0;
-  function tick(){
-    if(step<cards.length){cards[step].classList.add("done");step++}
-    else if(step===cards.length){screen.classList.add("full");rings[3].classList.add("done");rings[3].innerHTML='<svg width="16" height="16"><use href="#flw"/></svg>';step++}
-    else if(step===cards.length+2){
-      screen.classList.remove("full");rings[3].classList.remove("done");rings[3].innerHTML="";
-      cards.forEach(function(c){c.classList.remove("done");void c.offsetWidth});step=0}
-    else step++;
-  }
-  if(!matchMedia("(prefers-reduced-motion: reduce)").matches){setTimeout(function(){tick();setInterval(tick,1100)},900)}
-  else{cards.forEach(function(c){c.classList.add("done")});screen.classList.add("full")}
 })();
 </script>
 </body>
