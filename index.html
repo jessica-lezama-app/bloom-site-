@@ -6,6 +6,7 @@
 <title>Bloom</title>
 <meta name="description" content="Bloom, ton suivi d'habitudes tout en douceur.">
 <meta name="theme-color" content="#fdf2f4">
+<meta http-equiv="refresh" content="0; url=https://apps.apple.com/ch/app/bloom-habits/id6811036834?l=fr-FR">
 <style>
   :root { --bg:#fdf2f4; --fg:#3b2a30; --accent:#e0678a; }
   @media (prefers-color-scheme: dark) { :root { --bg:#241a1e; --fg:#f7e9ed; --accent:#f08aa8; } }
@@ -25,31 +26,8 @@
   <div class="logo">🌸</div>
   <h1>Bloom</h1>
   <p>Ton suivi d'habitudes, tout en douceur.</p>
-  <a class="btn" id="open" href="#">Ouvrir Bloom</a>
+  <a class="btn" href="https://apps.apple.com/ch/app/bloom-habits/id6811036834?l=fr-FR">Télécharger Bloom</a>
 </main>
-<script>
-  // ====== À MODIFIER ======
-  var APP_STORE_URL = "https://apps.apple.com/ch/app/bloom-habits/id6811036834?l=fr-FR"; // lien App Store de Bloom
-  var APP_SCHEME    = "bloom://";                                         // schéma d'ouverture de l'app
-  // ========================
-
-  var btn = document.getElementById("open");
-  btn.href = APP_STORE_URL;
-
-  var isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
-  if (isIOS) {
-    // Tente d'ouvrir l'app ; si elle ne s'ouvre pas, on file sur l'App Store.
-    var t = setTimeout(function () { location.href = APP_STORE_URL; }, 1200);
-    document.addEventListener("visibilitychange", function () {
-      if (document.hidden) clearTimeout(t);
-    });
-    location.href = APP_SCHEME;
-    btn.addEventListener("click", function (e) {
-      e.preventDefault();
-      location.href = APP_SCHEME;
-      setTimeout(function () { location.href = APP_STORE_URL; }, 1200);
-    });
-  }
-</script>
+<script>location.replace("https://apps.apple.com/ch/app/bloom-habits/id6811036834?l=fr-FR");</script>
 </body>
 </html>
